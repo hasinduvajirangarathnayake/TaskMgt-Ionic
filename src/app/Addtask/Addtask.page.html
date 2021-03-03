@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+     Task Management
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-col class="ion-padding-top ion-margin">
+  <div>
+    <br><br>
+  <form [formGroup]="taskForm" (ngSubmit)="addTask(taskForm.value)">
+    <ion-label class="ion-text-justify">Task Name</ion-label><br>
+    <ion-item class="mg">
+      <ion-input class="ion-text"  type="text"
+      id="taskname" 
+      formControlName="taskname"
+      placeholder="Enter Task"></ion-input>
+    </ion-item>
+    <ion-label class="ion-text" color="danger" *ngIf="taskForm.get('taskname').errors['taskIsexits']">
+      <br>
+      This task is already exits..!</ion-label>
+    <br><br>
+    <ion-label class="ion-text-justify">Compelete Date</ion-label><br>
+    <ion-item class="mg">
+      
+      <ion-datetime 
+      id="date" 
+      displayFormat="MM/DD/YY"
+      formControlName="completedate"
+      pickerFormat="MM/DD/YY"
+      placeholder="Select Date"></ion-datetime>
+    </ion-item><br><br>
+    <ion-button type="submit" block [disabled]="taskForm.get('taskname').errors['taskIsexits']">Add Task</ion-button>
+  </form>
+</div>
+</ion-col>

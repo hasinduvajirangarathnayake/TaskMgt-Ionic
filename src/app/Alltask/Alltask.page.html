@@ -1,0 +1,67 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+     Task Management
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-col class="ion-padding-top ion-margin" *ngIf="loading">
+  <img src="assets/loading.gif" alt="Description" />
+</ion-col>
+
+<ion-col class="ion-padding-top ion-margin " *ngIf="!loading">
+  <div scrollY="true" id="scroll-list">
+  <ng-container *ngFor="let TaskDetails  of tasklist; index as i">
+
+    <ion-card class="mg" 
+  *ngIf="TaskDetails.status === 'Not Complete'"
+  color="danger">
+    <ion-card-header>
+      <ion-item color="danger">
+      <ion-checkbox color="primary"
+      (click)="select(TaskDetails.id!,TaskDetails.taskname,TaskDetails.startdate,TaskDetails.completedate,TaskDetails.status,i  )"
+      ></ion-checkbox>
+      <ion-card-title color="light"> &nbsp;&nbsp;  {{ TaskDetails.taskname }}</ion-card-title></ion-item>
+      <ion-card-subtitle color="light">Asign date: {{ TaskDetails.startdate }}  </ion-card-subtitle>
+      <ion-card-subtitle color="light">End date: {{ TaskDetails.completedate }}  </ion-card-subtitle>
+      <br>
+      <ion-row *ngIf="slctrow===i">
+       
+        <ion-button color="success"
+        *ngIf="selectTaskstatus==='Not Complete'" 
+        (click)="update(selectTask,selectTaskName,selectTaskstartdate,selectTaskenddate)" 
+        >Update</ion-button>
+        <ion-button color="warning"
+        (click)="deleteTask(selectTask)"
+        >Remove</ion-button>
+      </ion-row>
+    </ion-card-header>
+  </ion-card>
+  <ion-card class="mg" 
+  *ngIf="TaskDetails.status === 'Complete'"
+  color="success">
+    <ion-card-header>
+      <ion-item color="success">
+      <ion-checkbox color="primary"
+      (click)="select(TaskDetails.id!,TaskDetails.taskname,TaskDetails.startdate,TaskDetails.completedate,TaskDetails.status,i  )"
+      ></ion-checkbox>
+      <ion-card-title color="light"> &nbsp;&nbsp;  {{ TaskDetails.taskname }}</ion-card-title></ion-item>
+      <ion-card-subtitle color="light">Asign date: {{ TaskDetails.startdate }}  </ion-card-subtitle>
+      <ion-card-subtitle color="light">End date: {{ TaskDetails.completedate }}  </ion-card-subtitle>
+      <br>
+      <ion-row *ngIf="slctrow===i">
+       
+        <ion-button color="success"
+        *ngIf="selectTaskstatus==='Not Complete'" 
+        (click)="update(selectTask,selectTaskName,selectTaskstartdate,selectTaskenddate)" 
+        >Update</ion-button>
+        <ion-button color="danger"
+        (click)="deleteTask(selectTask)"
+        >Remove</ion-button>
+      </ion-row>
+    </ion-card-header>
+  </ion-card>
+</ng-container>
+  </div>
+</ion-col>

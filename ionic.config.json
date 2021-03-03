@@ -1,0 +1,8 @@
+{
+  "name": "taskmgt",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}
